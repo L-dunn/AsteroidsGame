@@ -20,16 +20,16 @@ public void draw()
 }
 
 public void keyPressed(){
-  if(keyCode == LEFT){
+  if(key == 'a'){
     ship.turn(-5);
   }
-  if(keyCode== RIGHT){
+  if(key == 'd'){
     ship.turn(5);
   }
-  if(keyCode == UP){
+  if(key == 'w'){
     ship.accelerate(2);
   }
-  if(keyCode == DOWN){
+  if(key == 's'){
     ship.accelerate(-2);
   }
   if(keyCode == SHIFT){
