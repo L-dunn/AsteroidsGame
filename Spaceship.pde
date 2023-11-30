@@ -22,8 +22,12 @@ public class Spaceship extends Floater
       yCorners[2] = 0;
       yCorners[3] = -8;
     }
-    //do i need more getters and setters??
-    //maybe i will add those later
+    public float getMyX(){
+      return (float)myCenterX;
+    }
+    public float getMyY(){
+      return (float)myCenterY;
+    }
     public void setCenterX(int x){
       myCenterX = x;
     }
