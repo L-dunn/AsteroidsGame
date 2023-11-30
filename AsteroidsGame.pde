@@ -23,9 +23,15 @@ public void draw()
   for(int i = 0; i < stars.length; i++){
     stars[i].show();
   }
-  for(Asteroid asteroid : asteroidsList){
-    asteroid.move();
-    asteroid.show();
+  int index = 0;
+  while(index < asteroidsList.size()){
+    if(dist(ship.getMyX(), ship.getMyY(), asteroidsList.get(index).getMyX(), asteroidsList.get(index).getMyY()) < 30){
+      asteroidsList.remove(index);
+    } else {
+      asteroidsList.get(index).move();
+      asteroidsList.get(index).show();
+      index++;
+    }
   }
   ship.move();
   ship.show();
