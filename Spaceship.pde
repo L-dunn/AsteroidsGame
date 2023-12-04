@@ -28,6 +28,15 @@ public class Spaceship extends Floater
     public float getMyY(){
       return (float)myCenterY;
     }
+    public double getMyDir(){
+      return myPointDirection;
+    }
+    public double getMyXSpeed(){
+      return myXspeed;
+    }
+    public double getMyYSpeed(){
+      return myYspeed;
+    }
     public void setCenterX(int x){
       myCenterX = x;
     }
