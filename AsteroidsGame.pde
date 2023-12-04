@@ -1,9 +1,10 @@
-//your variable declarations here
+
 Spaceship ship = new Spaceship();
 Star[] stars = new Star[200];
-//Asteroid oneAsteroid = new Asteroid();
 
 ArrayList <Asteroid> asteroidsList = new ArrayList <Asteroid>();
+ArrayList <Bullet> bulletsList = new ArrayList <Bullet>();
+Bullet test = new Bullet(ship);
 
 public void setup() 
 {
@@ -23,15 +24,19 @@ public void draw()
   for(int i = 0; i < stars.length; i++){
     stars[i].show();
   }
-  int index = 0;
-  while(index < asteroidsList.size()){
-    if(dist(ship.getMyX(), ship.getMyY(), asteroidsList.get(index).getMyX(), asteroidsList.get(index).getMyY()) < 30){
-      asteroidsList.remove(index);
+  int asteroidIndex = asteroidsList.size() - 1;
+  int bulletsIndex = bulletsList.size() - 1;
+  while(asteroidIndex >= 0){
+    if(dist(ship.getMyX(), ship.getMyY(), asteroidsList.get(asteroidIndex).getMyX(), asteroidsList.get(asteroidIndex).getMyY()) < 30){
+      asteroidsList.remove(asteroidIndex);
     } else {
-      asteroidsList.get(index).move();
-      asteroidsList.get(index).show();
-      index++;
+      asteroidsList.get(asteroidIndex).move();
+      asteroidsList.get(asteroidIndex).show();
+      asteroidIndex--;
     }
+  }
+  while(bulletsIndex >= 0){
+    
   }
   ship.move();
   ship.show();
@@ -52,5 +57,8 @@ public void keyPressed(){
   }
   if(keyCode == SHIFT){
     ship.hyperspace();
+  }
+  if(key == ' '){
+    bulletsList.add(new Bullet(ship));
   }
 }
