@@ -24,19 +24,29 @@ public void draw()
   for(int i = 0; i < stars.length; i++){
     stars[i].show();
   }
+  
   int asteroidIndex = asteroidsList.size() - 1;
   int bulletsIndex = bulletsList.size() - 1;
-  while(asteroidIndex >= 0){
+  
+  //checks for collision between spaceship and asteroids and asteroids and bullets
+  while(asteroidIndex > 0){
     if(dist(ship.getMyX(), ship.getMyY(), asteroidsList.get(asteroidIndex).getMyX(), asteroidsList.get(asteroidIndex).getMyY()) < 30){
       asteroidsList.remove(asteroidIndex);
     } else {
       asteroidsList.get(asteroidIndex).move();
       asteroidsList.get(asteroidIndex).show();
-      asteroidIndex--;
     }
-  }
-  while(bulletsIndex >= 0){
-    
+    while(bulletsIndex > 0){
+      if(dist(bulletsList.get(bulletsIndex).getMyX(), bulletsList.get(bulletsIndex).getMyY(), asteroidsList.get(asteroidIndex).getMyX(), asteroidsList.get(asteroidIndex).getMyY()) < 30){
+        asteroidsList.remove(asteroidIndex);
+        bulletsList.remove(bulletsIndex);
+      } else {
+        bulletsList.get(bulletsIndex).move();
+        bulletsList.get(bulletsIndex).show();
+      }
+      bulletsIndex--;
+    }
+    asteroidIndex--;
   }
   ship.move();
   ship.show();
