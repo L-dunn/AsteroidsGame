@@ -4,7 +4,6 @@ Star[] stars = new Star[200];
 
 ArrayList <Asteroid> asteroidsList = new ArrayList <Asteroid>();
 ArrayList <Bullet> bulletsList = new ArrayList <Bullet>();
-Bullet test = new Bullet(ship);
 
 public void setup() 
 {
@@ -24,40 +23,43 @@ public void draw()
   for(int i = 0; i < stars.length; i++){
     stars[i].show();
   }
-  
-  int asteroidIndex = asteroidsList.size() - 1;
-  int bulletsIndex = bulletsList.size() - 1;
-  
-  //checks for collision between spaceship and asteroids and asteroids and bullets
-  while(asteroidIndex > 0){
-    if(dist(ship.getMyX(), ship.getMyY(), asteroidsList.get(asteroidIndex).getMyX(), asteroidsList.get(asteroidIndex).getMyY()) < 30){
-      asteroidsList.remove(asteroidIndex);
-    } else {
-      asteroidsList.get(asteroidIndex).move();
-      asteroidsList.get(asteroidIndex).show();
-    }
-    while(bulletsIndex > 0){
-      if(dist(bulletsList.get(bulletsIndex).getMyX(), bulletsList.get(bulletsIndex).getMyY(), asteroidsList.get(asteroidIndex).getMyX(), asteroidsList.get(asteroidIndex).getMyY()) < 30){
-        asteroidsList.remove(asteroidIndex);
-        bulletsList.remove(bulletsIndex);
-      } else {
-        bulletsList.get(bulletsIndex).move();
-        bulletsList.get(bulletsIndex).show();
-      }
-      bulletsIndex--;
-    }
-    asteroidIndex--;
+  for(int i = 0; i < asteroidsList.size(); i++){
+    asteroidsList.get(i).show();
+    asteroidsList.get(i).move();
   }
+  for(int i = 0; i < bulletsList.size(); i++){
+    bulletsList.get(i).show();
+    bulletsList.get(i).move();
+  }
+  //checks for collision between asteroid and spaceship
+  for(int i = asteroidsList.size() - 1; i >= 0; i--){
+    Asteroid currAsteroid = asteroidsList.get(i);
+    if(dist(ship.getMyX(), ship.getMyY(), asteroidsList.get(i).getMyX(), asteroidsList.get(i).getMyY()) < 35){
+      asteroidsList.remove(currAsteroid);
+    }
+  }
+  
+  //checks for collision between asteroids and bullets
+  for(int i = 0; i < bulletsList.size(); i++){
+    for(int j = 0; j < asteroidsList.size(); j++){
+      if(dist(bulletsList.get(i).getMyX(), bulletsList.get(i).getMyY(), asteroidsList.get(j).getMyX(), asteroidsList.get(j).getMyY()) < 35){
+        asteroidsList.remove(j);
+        bulletsList.remove(i);
+        break;
+      }
+    }
+  }
+ 
   ship.move();
   ship.show();
 }
 
 public void keyPressed(){
   if(key == 'a'){
-    ship.turn(-5);
+    ship.turn(-10);
   }
   if(key == 'd'){
-    ship.turn(5);
+    ship.turn(10);
   }
   if(key == 'w'){
     ship.accelerate(2);
