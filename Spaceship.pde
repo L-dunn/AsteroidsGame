@@ -14,7 +14,7 @@ public class Spaceship extends Floater
       
       xCorners[0] = -12;
       xCorners[1] = -24;
-      xCorners[2] = 16;
+      xCorners[2] = 8;
       xCorners[3] = -24;
       
       yCorners[0] = 0;
