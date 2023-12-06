@@ -9,6 +9,7 @@ public class Bullet extends Floater{
   }
   public void show(){
     stroke(255, 255, 255);
+    strokeWeight(3);
     ellipse((float)myCenterX, (float)myCenterY, 10, 10);
   }
   public float getMyX(){
@@ -16,5 +17,17 @@ public class Bullet extends Floater{
   }
   public float getMyY(){
     return (float)myCenterY;
+  }
+  //overrided from move() in Floater class so that bullet disappears when it goes off screen
+  public void move(){
+    //change the x and y coordinates by myXspeed and myYspeed       
+    myCenterX += myXspeed;    
+    myCenterY += myYspeed;     
+  
+    if(myCenterX > width || myCenterX < 0 ||
+      myCenterY < 0 || myCenterY > height)
+    {     
+      bulletsList.remove(this);   
+    }    
   }
 }
